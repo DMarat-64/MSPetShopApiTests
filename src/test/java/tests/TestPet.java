@@ -68,4 +68,27 @@ public class TestPet {
                 assertEquals("Pet not found", responseBody,
                         "Код ответа не совпал с ожидаемым. Ответ: " + responseBody));
     }
+
+    @Test
+    @Feature("Pet")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("marat")
+    public void testGetNonexistentPet() {
+        Response response = step("Отправка GET запроса на несуществующего Pet", () ->
+                given()
+                        .contentType(ContentType.JSON)
+                        .header("Accept", "application/json")
+                        .when()
+                        .get(BASE_URL + "/pet/9999"));
+
+        String responseBody = response.getBody().asString();
+
+        step("Проверка статус-код ответа == 404", () ->
+                assertEquals(404, response.getStatusCode(),
+                        "Код ответа не совпал с ожидаемым. Ответ: " + responseBody));
+
+        step("Проверка текст ответа 'Pet not found'", () ->
+                assertEquals("Pet not found", responseBody,
+                        "Код ответа не совпал с ожидаемым. Ответ: " + responseBody));
+    }
 }
