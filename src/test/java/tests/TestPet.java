@@ -94,7 +94,7 @@ public class TestPet {
                         "Код ответа не совпал с ожидаемым. Ответ: " + responseBody));
     }
 
-   @ParameterizedTest(name = "Добавление питомца со статусом: {1}")
+   @ParameterizedTest(name = "Добавление питомца со статусом: {2}")
     @CsvSource({
             "200, Kiwi, available",
             "201, Buddy, pending",
